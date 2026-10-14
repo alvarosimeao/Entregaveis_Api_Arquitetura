@@ -1,11 +1,16 @@
 package br.edu.ceuma.semana2.controlador;
 
-import br.edu.ceuma.semana2.entidade.Aluno;
+import br.edu.ceuma.semana2.dto.AlunoRequest;
+import br.edu.ceuma.semana2.dto.AlunoResponse;
 import br.edu.ceuma.semana2.servico.AlunoServico;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,23 +35,37 @@ public class AlunoControlador {
     }
 
     @GetMapping
-    public List<Aluno> listar() {
-        return alunoServico.listarTodos();
+    public ResponseEntity<List<AlunoResponse>> listar() {
+        return ResponseEntity.ok(alunoServico.listarTodos());
     }
 
     @GetMapping(params = "nome")
-    public List<Aluno> buscarPorNome(@RequestParam String nome) {
-        return alunoServico.buscarPorNome(nome);
+    public ResponseEntity<List<AlunoResponse>> buscarPorNome(@RequestParam String nome) {
+        return ResponseEntity.ok(alunoServico.buscarPorNome(nome));
     }
 
     @GetMapping("/{id}")
-    public Aluno buscarPorId(@PathVariable Long id) {
-        return alunoServico.buscarPorId(id);
+    public ResponseEntity<AlunoResponse> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(alunoServico.buscarPorId(id));
     }
 
     @PostMapping
-    public Aluno criar(@RequestBody Aluno aluno) {
-        return alunoServico.salvar(aluno);
+    public ResponseEntity<AlunoResponse> criar(@RequestBody AlunoRequest request) {
+        AlunoResponse resposta = alunoServico.criar(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(resposta);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> atualizar(@PathVariable Long id,
+                                          @RequestBody AlunoRequest request) {
+        alunoServico.atualizar(id, request);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        alunoServico.excluir(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/ra")

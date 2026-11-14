@@ -1,0 +1,10 @@
+flowchart LR
+  C[Cliente web/mobile] --> G[API Gateway]
+  G --> Cat[Catálogo]
+  G --> Ped[Pedidos]
+  Ped --> Pag[Pagamentos]
+  Cat --> BC[(Dados do catálogo)]
+  Ped --> BP[(Dados de pedidos)]
+  Pag --> BG[(Dados de pagamentos)]
+  Ped --> E[Eventos de pedido]
+  E --> N[Notificações]

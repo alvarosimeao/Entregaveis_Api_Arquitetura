@@ -1,5 +1,5 @@
 @startuml
-title EntregaJá — componentes do fluxo de pedido
+title iFood — modelo conceitual do fluxo de pedido
 left to right direction
 skinparam componentStyle uml2
 

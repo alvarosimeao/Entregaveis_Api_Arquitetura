@@ -2,9 +2,9 @@
 
 ## Sistema e recorte
 
-**EntregaJá** é um aplicativo fictício de delivery. Este exercício considera somente o fluxo em que o cliente consulta o cardápio, cria um pedido, solicita autorização de pagamento e recebe a confirmação. A arquitetura abaixo é uma **proposta conceitual** para o estudo de caso; não descreve um sistema real.
+O **iFood** é a referência de sistema conhecido para este exercício. O recorte considera somente o fluxo em que o cliente consulta o cardápio, cria um pedido, solicita autorização de pagamento e recebe a confirmação. A arquitetura abaixo é uma **proposta conceitual** para estudar esse fluxo; não representa nem afirma conhecer a arquitetura interna real do iFood.
 
-![Diagrama de componentes do EntregaJá](diagrama_componentes.svg)
+![Diagrama conceitual de componentes do fluxo de pedido do iFood](diagrama_componentes.svg)
 
 O arquivo [diagrama_componentes.puml](diagrama_componentes.puml) guarda a fonte editável do diagrama. O SVG pode ser aberto diretamente no GitHub ou exportado para PDF.
 

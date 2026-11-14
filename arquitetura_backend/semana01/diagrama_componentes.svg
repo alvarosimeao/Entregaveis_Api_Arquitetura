@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1500" height="900" viewBox="0 0 1500 900" role="img" aria-labelledby="title desc">
-  <title id="title">Diagrama UML de componentes do EntregaJá</title>
+  <title id="title">Diagrama UML conceitual do fluxo de pedido do iFood</title>
   <desc id="desc">O aplicativo chama um balanceador, gateway, catálogo e pedidos. Pedidos usa pagamento, banco e notificações. Catálogo usa cache e banco próprio.</desc>
   <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#334155"/></marker></defs>
   <style>
     .bg{fill:#f8fafc}.box{fill:#fff;stroke:#334155;stroke-width:2.4;rx:12}.infra{fill:#eef2ff;stroke:#4f46e5;stroke-width:2.4;rx:12}.db{fill:#ecfdf5;stroke:#047857;stroke-width:2.4;rx:12}.ext{fill:#fff7ed;stroke:#c2410c;stroke-width:2.4;rx:12}.title{font:700 30px Arial,sans-serif;fill:#0f172a}.name{font:700 20px Arial,sans-serif;fill:#0f172a}.sub{font:16px Arial,sans-serif;fill:#475569}.label{font:700 15px Arial,sans-serif;fill:#334155}.edge{stroke:#334155;stroke-width:2.4;fill:none;marker-end:url(#arrow)}.icon{fill:none;stroke:#334155;stroke-width:2}
   </style>
   <rect class="bg" width="1500" height="900"/>
-  <text x="55" y="58" class="title">EntregaJá: fluxo de pedido</text>
+  <text x="55" y="58" class="title">iFood: fluxo de pedido (modelo conceitual)</text>
   <text x="55" y="87" class="sub">Proposta conceitual de componentes UML. Setas indicam quem chama ou publica para quem recebe.</text>
 
   <path class="edge" d="M300 184 H390"/><text class="label" x="316" y="170">HTTPS</text>

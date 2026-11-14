@@ -4,7 +4,7 @@ Esta entrega aprofunda os três estudos fictícios da [semana 02](../semana02/RE
 
 ## Prioridades dos requisitos não funcionais
 
-Usamos o modelo de qualidade de produto da [ISO/IEC 25010:2023](https://www.iso.org/standard/78176.html) como referência para nomear e comparar atributos de qualidade. As metas numéricas abaixo são **critérios propostos para o exercício**, sujeitos a validação com stakeholders e testes.
+Usamos o modelo de qualidade de produto da [ISO/IEC 25010:2023](https://www.iso.org/standard/78176.html) como referência para nomear e comparar atributos de qualidade. Os critérios abaixo são **propostas para o exercício**, sujeitos a validação com stakeholders e testes.
 
 | Sistema | Prioridade 1 | Prioridade 2 | Prioridade 3 | Critério proposto |
 | --- | --- | --- | --- | --- |

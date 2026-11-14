@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Diagrama de blocos de um jogo multiplayer</title>
+  <desc id="desc">Dois jogadores enviam comandos a uma entrada regional, que os entrega a um servidor de partida autoritativo. O servidor consulta matchmaking e grava resultados.</desc>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#334155"/></marker></defs>
+  <style>.bg{fill:#f8fafc}.box{fill:#fff;stroke:#334155;stroke-width:2.4;rx:12}.central{fill:#e0e7ff;stroke:#4338ca;stroke-width:2.4;rx:12}.data{fill:#ecfdf5;stroke:#047857;stroke-width:2.4;rx:12}.title{font:700 30px Arial,sans-serif;fill:#0f172a}.name{font:700 20px Arial,sans-serif;fill:#0f172a}.sub{font:16px Arial,sans-serif;fill:#475569}.edge{stroke:#334155;stroke-width:2.4;fill:none;marker-end:url(#a)}.label{font:15px Arial,sans-serif;fill:#334155}</style>
+  <rect class="bg" width="1200" height="650"/><text class="title" x="50" y="58">Jogo multiplayer: cliente-servidor autoritativo</text>
+  <path class="edge" d="M260 220 H390"/><path class="edge" d="M260 390 H390"/><path class="edge" d="M610 300 H720"/><path class="edge" d="M910 290 H1020 V200"/><path class="edge" d="M910 340 H1020 V430"/>
+  <text class="label" x="278" y="208">comandos</text><text class="label" x="278" y="378">comandos</text><text class="label" x="624" y="286">comandos validados</text>
+  <g transform="translate(60 170)"><rect class="box" width="200" height="100"/><text class="name" x="20" y="43">Jogador A</text><text class="sub" x="20" y="74">cliente</text></g>
+  <g transform="translate(60 340)"><rect class="box" width="200" height="100"/><text class="name" x="20" y="43">Jogador B</text><text class="sub" x="20" y="74">cliente</text></g>
+  <g transform="translate(390 245)"><rect class="box" width="220" height="110"/><text class="name" x="20" y="46">Entrada regional</text><text class="sub" x="20" y="79">roteia conexões</text></g>
+  <g transform="translate(720 245)"><rect class="central" width="190" height="110"/><text class="name" x="16" y="43">Servidor de</text><text class="name" x="16" y="70">partida</text><text class="sub" x="16" y="95">autoridade do estado</text></g>
+  <g transform="translate(1020 140)"><rect class="box" width="150" height="100"/><text class="name" x="13" y="43">Matchmaking</text><text class="sub" x="13" y="74">forma partidas</text></g>
+  <g transform="translate(1020 390)"><rect class="data" width="150" height="100"/><text class="name" x="13" y="43">Resultados</text><text class="sub" x="13" y="74">persistência</text></g>
+  <text class="sub" x="50" y="575">O servidor publica o estado validado de volta aos jogadores pela entrada regional.</text>
+</svg>

@@ -1,0 +1,9 @@
+flowchart LR
+  J1[Jogador A] -->|comandos| E[Entrada regional]
+  J2[Jogador B] -->|comandos| E
+  E --> S[Servidor autoritativo de partida]
+  S -->|estado validado| E
+  E -->|atualizações| J1
+  E -->|atualizações| J2
+  S --> M[Serviço de matchmaking]
+  S --> R[(Registro de resultados)]

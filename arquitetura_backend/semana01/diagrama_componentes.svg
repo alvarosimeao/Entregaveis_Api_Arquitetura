@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="900" viewBox="0 0 1500 900" role="img" aria-labelledby="title desc">
+  <title id="title">Diagrama UML de componentes do EntregaJá</title>
+  <desc id="desc">O aplicativo chama um balanceador, gateway, catálogo e pedidos. Pedidos usa pagamento, banco e notificações. Catálogo usa cache e banco próprio.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#334155"/></marker></defs>
+  <style>
+    .bg{fill:#f8fafc}.box{fill:#fff;stroke:#334155;stroke-width:2.4;rx:12}.infra{fill:#eef2ff;stroke:#4f46e5;stroke-width:2.4;rx:12}.db{fill:#ecfdf5;stroke:#047857;stroke-width:2.4;rx:12}.ext{fill:#fff7ed;stroke:#c2410c;stroke-width:2.4;rx:12}.title{font:700 30px Arial,sans-serif;fill:#0f172a}.name{font:700 20px Arial,sans-serif;fill:#0f172a}.sub{font:16px Arial,sans-serif;fill:#475569}.label{font:700 15px Arial,sans-serif;fill:#334155}.edge{stroke:#334155;stroke-width:2.4;fill:none;marker-end:url(#arrow)}.icon{fill:none;stroke:#334155;stroke-width:2}
+  </style>
+  <rect class="bg" width="1500" height="900"/>
+  <text x="55" y="58" class="title">EntregaJá: fluxo de pedido</text>
+  <text x="55" y="87" class="sub">Proposta conceitual de componentes UML. Setas indicam quem chama ou publica para quem recebe.</text>
+
+  <path class="edge" d="M300 184 H390"/><text class="label" x="316" y="170">HTTPS</text>
+  <path class="edge" d="M610 184 H700"/><text class="label" x="632" y="170">HTTPS</text>
+  <path class="edge" d="M810 236 V306 H270 V350"/><text class="label" x="294" y="295">REST: cardápio</text>
+  <path class="edge" d="M920 236 V350"/><text class="label" x="933" y="294">REST: pedido</text>
+  <path class="edge" d="M270 450 V560 H215 V622"/><text class="label" x="65" y="551">leitura rápida</text>
+  <path class="edge" d="M380 400 H500 V622"/><text class="label" x="389" y="388">consulta</text>
+  <path class="edge" d="M1030 400 H1110"/><text class="label" x="1039" y="385">autorizar</text>
+  <path class="edge" d="M1220 450 V525 H1330 V622"/><text class="label" x="1240" y="515">API externa</text>
+  <path class="edge" d="M920 450 V622"/><text class="label" x="933" y="540">persistir</text>
+  <path class="edge" d="M1030 427 H1115 V560 H1110 V622"/><text class="label" x="1050" y="550">evento</text>
+  <path class="edge" d="M920 722 V790 H1035"/><text class="label" x="930" y="780">replicação</text>
+
+  <g transform="translate(80 132)"><rect class="box" width="220" height="104"/><text class="name" x="20" y="43">App Cliente</text><text class="sub" x="20" y="74">consulta e compra</text><path class="icon" d="M181 22 h24 v15 h-24 z M176 28 h10 v22 h-10 z"/></g>
+  <g transform="translate(390 132)"><rect class="infra" width="220" height="104"/><text class="name" x="20" y="43">Balanceador</text><text class="sub" x="20" y="74">distribui tráfego</text><path class="icon" d="M181 22 h24 v15 h-24 z M176 28 h10 v22 h-10 z"/></g>
+  <g transform="translate(700 132)"><rect class="infra" width="220" height="104"/><text class="name" x="20" y="43">API Gateway</text><text class="sub" x="20" y="74">roteia chamadas</text><path class="icon" d="M181 22 h24 v15 h-24 z M176 28 h10 v22 h-10 z"/></g>
+  <g transform="translate(160 350)"><rect class="box" width="220" height="100"/><text class="name" x="20" y="42">Catálogo</text><text class="sub" x="20" y="72">itens e preços</text><path class="icon" d="M181 22 h24 v15 h-24 z M176 28 h10 v22 h-10 z"/></g>
+  <g transform="translate(810 350)"><rect class="box" width="220" height="100"/><text class="name" x="20" y="42">Pedidos</text><text class="sub" x="20" y="72">estado e regras</text><path class="icon" d="M181 22 h24 v15 h-24 z M176 28 h10 v22 h-10 z"/></g>
+  <g transform="translate(1110 350)"><rect class="box" width="220" height="100"/><text class="name" x="20" y="42">Pagamentos</text><text class="sub" x="20" y="72">autorização</text><path class="icon" d="M181 22 h24 v15 h-24 z M176 28 h10 v22 h-10 z"/></g>
+  <g transform="translate(105 622)"><rect class="infra" width="220" height="100"/><text class="name" x="20" y="42">Cache</text><text class="sub" x="20" y="72">consulta frequente</text><path class="icon" d="M181 22 h24 v15 h-24 z M176 28 h10 v22 h-10 z"/></g>
+  <g transform="translate(390 622)"><rect class="db" width="220" height="100"/><text class="name" x="20" y="42">Banco Catálogo</text><text class="sub" x="20" y="72">fonte de dados</text></g>
+  <g transform="translate(810 622)"><rect class="db" width="220" height="100"/><text class="name" x="20" y="42">Banco Pedidos</text><text class="sub" x="20" y="72">primário crítico</text></g>
+  <g transform="translate(1040 790)"><rect class="db" width="220" height="76"/><text class="name" x="20" y="34">Réplica Pedidos</text><text class="sub" x="20" y="60">recuperação</text></g>
+  <g transform="translate(1060 622)"><rect class="box" width="220" height="100"/><text class="name" x="20" y="42">Notificações</text><text class="sub" x="20" y="72">confirmação</text><path class="icon" d="M181 22 h24 v15 h-24 z M176 28 h10 v22 h-10 z"/></g>
+  <g transform="translate(1280 622)"><rect class="ext" width="180" height="100"/><text class="name" x="16" y="42">Provedor</text><text class="sub" x="16" y="72">externo</text></g>
+  <text x="55" y="850" class="sub">Ponto de falha: primário de Pedidos. Mitigação proposta: réplica, promoção controlada, monitoramento e backups testados.</text>
+</svg>

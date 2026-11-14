@@ -1,0 +1,38 @@
+@startuml
+title EntregaJá — componentes do fluxo de pedido
+left to right direction
+skinparam componentStyle uml2
+
+actor Cliente
+component "App Cliente" as App
+component "Balanceador" as LB
+component "API Gateway" as GW
+component "Serviço de Catálogo" as Catalogo
+component "Serviço de Pedidos" as Pedidos
+component "Serviço de Pagamentos" as Pagamentos
+component "Serviço de Notificações" as Notificacoes
+component "Cache" as Cache
+database "Banco Catálogo" as BCat
+database "Banco Pedidos\nPrimário" as BPed
+database "Réplica Pedidos" as Replica
+cloud "Provedor de pagamento" as PSP
+
+Cliente --> App
+App --> LB : HTTPS
+LB --> GW : HTTPS
+GW --> Catalogo : REST /cardapio
+GW --> Pedidos : REST /pedidos
+Catalogo --> Cache : leitura
+Catalogo --> BCat : consulta
+Pedidos --> Pagamentos : autorizar
+Pagamentos --> PSP : API externa
+Pedidos --> BPed : persistir
+BPed --> Replica : replicação
+Pedidos --> Notificacoes : PedidoConfirmado
+Notificacoes --> App : confirmação
+
+note bottom of BPed
+  Ponto crítico: novas confirmações dependem do primário.
+  Réplica, promoção controlada e backups reduzem o risco.
+end note
+@enduml

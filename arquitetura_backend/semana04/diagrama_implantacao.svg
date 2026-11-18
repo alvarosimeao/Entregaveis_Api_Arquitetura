@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="740" viewBox="0 0 1200 740">
+<style>text{font-family:Arial,sans-serif;fill:#192a2b}.title{font-size:30px;font-weight:bold}.sub{font-size:16px;fill:#526262}.node{fill:#f4f8f7;stroke:#237066;stroke-width:2;rx:13}.external{fill:#fff;stroke:#758d89;stroke-width:2;rx:13}.head{font-size:19px;font-weight:bold}.desc{font-size:15px}.arrow{stroke:#237066;stroke-width:2.5;fill:none;marker-end:url(#a)}.dash{stroke:#93aaa5;stroke-width:2;stroke-dasharray:6 5;fill:none}</style>
+<defs><marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#237066"/></marker></defs>
+<rect width="1200" height="740" fill="#fff"/><text x="55" y="55" class="title">Aplicativo de entregas — implantação</text><text x="55" y="83" class="sub">Exemplo de implantação com duas instâncias do mesmo monólito</text>
+<rect x="55" y="170" width="215" height="95" class="external"/><text x="75" y="205" class="head">Dispositivos</text><text x="75" y="231" class="desc">Cliente, restaurante,</text><text x="75" y="250" class="desc">entregador</text>
+<rect x="342" y="170" width="210" height="95" class="node"/><text x="362" y="205" class="head">Balanceador</text><text x="362" y="231" class="desc">HTTPS / TLS</text>
+<rect x="627" y="115" width="255" height="95" class="node"/><text x="647" y="150" class="head">Aplicação A</text><text x="647" y="177" class="desc">Monólito modular</text>
+<rect x="627" y="240" width="255" height="95" class="node"/><text x="647" y="275" class="head">Aplicação B</text><text x="647" y="302" class="desc">Monólito modular</text>
+<rect x="954" y="115" width="205" height="95" class="node"/><text x="974" y="150" class="head">PostgreSQL</text><text x="974" y="177" class="desc">Pedidos e contas</text>
+<rect x="954" y="240" width="205" height="95" class="node"/><text x="974" y="275" class="head">Fila de eventos</text><text x="974" y="302" class="desc">Mensagens duráveis</text>
+<rect x="627" y="430" width="255" height="95" class="external"/><text x="647" y="465" class="head">Pagamento externo</text><text x="647" y="492" class="desc">API do provedor</text>
+<rect x="954" y="430" width="205" height="95" class="external"/><text x="974" y="465" class="head">Mensageria externa</text><text x="974" y="492" class="desc">E-mail / push</text>
+<rect x="342" y="430" width="210" height="95" class="node"/><text x="362" y="465" class="head">Segredos</text><text x="362" y="492" class="desc">Gestor de credenciais</text>
+<path d="M270 217 H342 M552 217 H590 V162 H627 M590 217 V287 H627 M882 162 H954 M882 287 H954 M755 335 V430 M882 477 H954" class="arrow"/>
+<path d="M447 430 V353 H715 V335 M447 430 V353 H793 V210" class="dash"/>
+<text x="55" y="586" class="sub">Banco: backup e restauração testados. Fila: repetição limitada e monitoramento.</text>
+<text x="55" y="613" class="sub">Instâncias: mesma versão e sem sessão local; segredos fora do repositório.</text>
+<text x="55" y="677" class="sub">As caixas representam papéis de implantação, sem afirmar infraestrutura real da Ceuma.</text>
+</svg>

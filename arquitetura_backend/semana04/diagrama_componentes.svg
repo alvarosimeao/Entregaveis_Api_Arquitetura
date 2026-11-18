@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+<style>text{font-family:Arial,sans-serif;fill:#192a2b} .title{font-size:30px;font-weight:bold}.sub{font-size:17px;fill:#526262}.box{fill:#f4f8f7;stroke:#237066;stroke-width:2;rx:12}.ext{fill:#fff;stroke:#758d89;stroke-width:2;rx:12}.head{font-size:19px;font-weight:bold}.desc{font-size:15px}.arrow{stroke:#237066;stroke-width:2.5;fill:none;marker-end:url(#arrow)}</style>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#237066"/></marker></defs>
+<rect width="1200" height="700" fill="#fff"/><text x="55" y="56" class="title">Aplicativo de entregas — componentes</text><text x="55" y="84" class="sub">Modelo conceitual para o exercício individual</text>
+<rect x="55" y="142" width="220" height="83" class="ext"/><text x="75" y="177" class="head">Cliente</text><text x="75" y="201" class="desc">App / navegador</text>
+<rect x="55" y="259" width="220" height="83" class="ext"/><text x="75" y="294" class="head">Restaurante</text><text x="75" y="318" class="desc">Painel de pedidos</text>
+<rect x="55" y="376" width="220" height="83" class="ext"/><text x="75" y="411" class="head">Entregador</text><text x="75" y="435" class="desc">App de entregas</text>
+<rect x="348" y="126" width="516" height="474" fill="#eaf2f0" stroke="#237066" stroke-width="2" rx="16"/><text x="374" y="162" class="head">Aplicação — monólito modular</text>
+<rect x="375" y="193" width="215" height="78" class="box"/><text x="394" y="225" class="head">Identidade</text><text x="394" y="248" class="desc">Contas e perfis</text>
+<rect x="623" y="193" width="215" height="78" class="box"/><text x="642" y="225" class="head">Catálogo</text><text x="642" y="248" class="desc">Restaurantes e itens</text>
+<rect x="375" y="301" width="215" height="78" class="box"/><text x="394" y="333" class="head">Pedidos</text><text x="394" y="356" class="desc">Estados e idempotência</text>
+<rect x="623" y="301" width="215" height="78" class="box"/><text x="642" y="333" class="head">Pagamentos</text><text x="642" y="356" class="desc">Autorização externa</text>
+<rect x="375" y="409" width="215" height="78" class="box"/><text x="394" y="441" class="head">Entregas</text><text x="394" y="464" class="desc">Atribuição e status</text>
+<rect x="623" y="409" width="215" height="78" class="box"/><text x="642" y="441" class="head">Notificações</text><text x="642" y="464" class="desc">Avisos por evento</text>
+<rect x="927" y="200" width="225" height="83" class="ext"/><text x="947" y="235" class="head">PostgreSQL</text><text x="947" y="259" class="desc">Estado transacional</text>
+<rect x="927" y="326" width="225" height="83" class="ext"/><text x="947" y="361" class="head">Fila</text><text x="947" y="385" class="desc">Eventos assíncronos</text>
+<rect x="927" y="452" width="225" height="83" class="ext"/><text x="947" y="487" class="head">Provedor de pagamento</text><text x="947" y="511" class="desc">Autorização</text>
+<path d="M275 183 H348 M275 300 H348 M275 417 H348 M590 340 H623 M590 340 V448 M838 340 H927 V493 M864 240 H927 M838 448 H890 V367 H927" class="arrow"/>
+<text x="56" y="640" class="sub">HTTPS nos clientes • chamadas internas entre módulos • eventos para tarefas assíncronas</text>
+</svg>

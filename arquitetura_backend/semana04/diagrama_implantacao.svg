@@ -1,19 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="740" viewBox="0 0 1200 740">
-<style>text{font-family:Arial,sans-serif;fill:#192a2b}.title{font-size:30px;font-weight:bold}.sub{font-size:16px;fill:#526262}.node{fill:#f4f8f7;stroke:#237066;stroke-width:2;rx:13}.external{fill:#fff;stroke:#758d89;stroke-width:2;rx:13}.head{font-size:19px;font-weight:bold}.desc{font-size:15px}.arrow{stroke:#237066;stroke-width:2.5;fill:none;marker-end:url(#a)}.dash{stroke:#93aaa5;stroke-width:2;stroke-dasharray:6 5;fill:none}</style>
-<defs><marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#237066"/></marker></defs>
-<rect width="1200" height="740" fill="#fff"/><text x="55" y="55" class="title">Aplicativo de entregas — implantação</text><text x="55" y="83" class="sub">Exemplo de implantação com duas instâncias do mesmo monólito</text>
-<rect x="55" y="170" width="215" height="95" class="external"/><text x="75" y="205" class="head">Dispositivos</text><text x="75" y="231" class="desc">Cliente, restaurante,</text><text x="75" y="250" class="desc">entregador</text>
-<rect x="342" y="170" width="210" height="95" class="node"/><text x="362" y="205" class="head">Balanceador</text><text x="362" y="231" class="desc">HTTPS / TLS</text>
-<rect x="627" y="115" width="255" height="95" class="node"/><text x="647" y="150" class="head">Aplicação A</text><text x="647" y="177" class="desc">Monólito modular</text>
-<rect x="627" y="240" width="255" height="95" class="node"/><text x="647" y="275" class="head">Aplicação B</text><text x="647" y="302" class="desc">Monólito modular</text>
-<rect x="954" y="115" width="205" height="95" class="node"/><text x="974" y="150" class="head">PostgreSQL</text><text x="974" y="177" class="desc">Pedidos e contas</text>
-<rect x="954" y="240" width="205" height="95" class="node"/><text x="974" y="275" class="head">Fila de eventos</text><text x="974" y="302" class="desc">Mensagens duráveis</text>
-<rect x="627" y="430" width="255" height="95" class="external"/><text x="647" y="465" class="head">Pagamento externo</text><text x="647" y="492" class="desc">API do provedor</text>
-<rect x="954" y="430" width="205" height="95" class="external"/><text x="974" y="465" class="head">Mensageria externa</text><text x="974" y="492" class="desc">E-mail / push</text>
-<rect x="342" y="430" width="210" height="95" class="node"/><text x="362" y="465" class="head">Segredos</text><text x="362" y="492" class="desc">Gestor de credenciais</text>
-<path d="M270 217 H342 M552 217 H590 V162 H627 M590 217 V287 H627 M882 162 H954 M882 287 H954 M755 335 V430 M882 477 H954" class="arrow"/>
-<path d="M447 430 V353 H715 V335 M447 430 V353 H793 V210" class="dash"/>
-<text x="55" y="586" class="sub">Banco: backup e restauração testados. Fila: repetição limitada e monitoramento.</text>
-<text x="55" y="613" class="sub">Instâncias: mesma versão e sem sessão local; segredos fora do repositório.</text>
-<text x="55" y="677" class="sub">As caixas representam papéis de implantação, sem afirmar infraestrutura real da Ceuma.</text>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="1080" height="378" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1080 378" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="1080" height="378"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-378)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="170" width="159" height="62" rx="10" ry="10" style="stroke: rgb(80%,86%,84%); stroke-linecap: butt; stroke-width: 1.4; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="14" y="208" style="font-family: Segoe UI, Arial, sans-serif; font-weight: bold; font-size: 19px;fill: rgb(6%,17%,18%); stroke:none;" transform="translate(0,416) scale(1,-1)">Dispositivos</text>
+			<text x="14" y="187" style="font-family: Segoe UI, Arial, sans-serif; font-size: 15px;fill: rgb(25%,37%,38%); stroke:none;" transform="translate(0,374) scale(1,-1)">App e navegador</text>
+			<rect x="209" y="170" width="177" height="62" rx="10" ry="10" style="stroke: rgb(80%,86%,84%); stroke-linecap: butt; stroke-width: 1.4; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="223" y="208" style="font-family: Segoe UI, Arial, sans-serif; font-weight: bold; font-size: 19px;fill: rgb(6%,17%,18%); stroke:none;" transform="translate(0,416) scale(1,-1)">Balanceador</text>
+			<text x="223" y="187" style="font-family: Segoe UI, Arial, sans-serif; font-size: 15px;fill: rgb(25%,37%,38%); stroke:none;" transform="translate(0,374) scale(1,-1)">HTTPS / TLS</text>
+			<path d="M 159,201 L 209,201 Z" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="209 201, 200.3218 196.0312, 200.3218 205.9688" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 1; fill: rgb(12%,40%,35%); fill-rule: evenodd;"/>
+			<rect x="450" y="55" width="305" height="287" rx="12" ry="12" style="stroke: rgb(80%,86%,84%); stroke-linecap: butt; stroke-width: 1.4; fill: rgb(91%,95%,92%); fill-rule: evenodd;"/>
+			<text x="472" y="305" style="font-family: Segoe UI, Arial, sans-serif; font-weight: bold; font-size: 21px;fill: rgb(6%,17%,18%); stroke:none;" transform="translate(0,610) scale(1,-1)">Duas instâncias idênticas</text>
+			<rect x="472" y="222" width="261" height="62" rx="10" ry="10" style="stroke: rgb(80%,86%,84%); stroke-linecap: butt; stroke-width: 1.4; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="486" y="260" style="font-family: Segoe UI, Arial, sans-serif; font-weight: bold; font-size: 19px;fill: rgb(6%,17%,18%); stroke:none;" transform="translate(0,520) scale(1,-1)">Instância A</text>
+			<text x="486" y="239" style="font-family: Segoe UI, Arial, sans-serif; font-size: 15px;fill: rgb(25%,37%,38%); stroke:none;" transform="translate(0,478) scale(1,-1)">Mesmo monólito modular</text>
+			<rect x="472" y="118" width="261" height="62" rx="10" ry="10" style="stroke: rgb(80%,86%,84%); stroke-linecap: butt; stroke-width: 1.4; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="486" y="156" style="font-family: Segoe UI, Arial, sans-serif; font-weight: bold; font-size: 19px;fill: rgb(6%,17%,18%); stroke:none;" transform="translate(0,312) scale(1,-1)">Instância B</text>
+			<text x="486" y="135" style="font-family: Segoe UI, Arial, sans-serif; font-size: 15px;fill: rgb(25%,37%,38%); stroke:none;" transform="translate(0,270) scale(1,-1)">Mesmo monólito modular</text>
+			<text x="472" y="86" style="font-family: Segoe UI, Arial, sans-serif; font-size: 15px;fill: rgb(25%,37%,38%); stroke:none;" transform="translate(0,172) scale(1,-1)">Sem sessão local nas instâncias</text>
+			<path d="M 386,201 L 420,201 Z" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 420,253 L 420,149 Z" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 420,253 L 472,253 Z" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="472 253, 463.3218 248.0312, 463.3218 257.9688" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 1; fill: rgb(12%,40%,35%); fill-rule: evenodd;"/>
+			<path d="M 420,149 L 472,149 Z" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="472 149, 463.3218 144.0312, 463.3218 153.9688" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 1; fill: rgb(12%,40%,35%); fill-rule: evenodd;"/>
+			<path d="M 733,253 L 789,253 Z" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 733,149 L 789,149 Z" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 789,343 L 789,39 Z" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 2;"/>
+			<rect x="827" y="312" width="253" height="62" rx="10" ry="10" style="stroke: rgb(80%,86%,84%); stroke-linecap: butt; stroke-width: 1.4; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="841" y="350" style="font-family: Segoe UI, Arial, sans-serif; font-weight: bold; font-size: 19px;fill: rgb(6%,17%,18%); stroke:none;" transform="translate(0,700) scale(1,-1)">PostgreSQL</text>
+			<text x="841" y="329" style="font-family: Segoe UI, Arial, sans-serif; font-size: 15px;fill: rgb(25%,37%,38%); stroke:none;" transform="translate(0,658) scale(1,-1)">Pedidos e contas</text>
+			<path d="M 789,343 L 827,343 Z" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="827 343, 818.3218 338.0312, 818.3218 347.9688" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 1; fill: rgb(12%,40%,35%); fill-rule: evenodd;"/>
+			<rect x="827" y="236" width="253" height="62" rx="10" ry="10" style="stroke: rgb(80%,86%,84%); stroke-linecap: butt; stroke-width: 1.4; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="841" y="274" style="font-family: Segoe UI, Arial, sans-serif; font-weight: bold; font-size: 19px;fill: rgb(6%,17%,18%); stroke:none;" transform="translate(0,548) scale(1,-1)">Fila de eventos</text>
+			<text x="841" y="253" style="font-family: Segoe UI, Arial, sans-serif; font-size: 15px;fill: rgb(25%,37%,38%); stroke:none;" transform="translate(0,506) scale(1,-1)">Mensagens duráveis</text>
+			<path d="M 789,267 L 827,267 Z" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="827 267, 818.3218 262.0312, 818.3218 271.9688" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 1; fill: rgb(12%,40%,35%); fill-rule: evenodd;"/>
+			<rect x="827" y="160" width="253" height="62" rx="10" ry="10" style="stroke: rgb(80%,86%,84%); stroke-linecap: butt; stroke-width: 1.4; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="841" y="198" style="font-family: Segoe UI, Arial, sans-serif; font-weight: bold; font-size: 19px;fill: rgb(6%,17%,18%); stroke:none;" transform="translate(0,396) scale(1,-1)">Gestor de segredos</text>
+			<text x="841" y="177" style="font-family: Segoe UI, Arial, sans-serif; font-size: 15px;fill: rgb(25%,37%,38%); stroke:none;" transform="translate(0,354) scale(1,-1)">Credenciais fora do código</text>
+			<path d="M 789,191 L 827,191 Z" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="827 191, 818.3218 186.0312, 818.3218 195.9688" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 1; fill: rgb(12%,40%,35%); fill-rule: evenodd;"/>
+			<rect x="827" y="84" width="253" height="62" rx="10" ry="10" style="stroke: rgb(80%,86%,84%); stroke-linecap: butt; stroke-width: 1.4; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="841" y="122" style="font-family: Segoe UI, Arial, sans-serif; font-weight: bold; font-size: 19px;fill: rgb(6%,17%,18%); stroke:none;" transform="translate(0,244) scale(1,-1)">Pagamento externo</text>
+			<text x="841" y="101" style="font-family: Segoe UI, Arial, sans-serif; font-size: 15px;fill: rgb(25%,37%,38%); stroke:none;" transform="translate(0,202) scale(1,-1)">API do provedor</text>
+			<path d="M 789,115 L 827,115 Z" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="827 115, 818.3218 110.0312, 818.3218 119.9688" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 1; fill: rgb(12%,40%,35%); fill-rule: evenodd;"/>
+			<rect x="827" y="8" width="253" height="62" rx="10" ry="10" style="stroke: rgb(80%,86%,84%); stroke-linecap: butt; stroke-width: 1.4; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="841" y="46" style="font-family: Segoe UI, Arial, sans-serif; font-weight: bold; font-size: 19px;fill: rgb(6%,17%,18%); stroke:none;" transform="translate(0,92) scale(1,-1)">Mensageria externa</text>
+			<text x="841" y="25" style="font-family: Segoe UI, Arial, sans-serif; font-size: 15px;fill: rgb(25%,37%,38%); stroke:none;" transform="translate(0,50) scale(1,-1)">E-mail e push</text>
+			<path d="M 789,39 L 827,39 Z" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="827 39, 818.3218 34.0312, 818.3218 43.9688" style="stroke: rgb(12%,40%,35%); stroke-linecap: butt; stroke-width: 1; fill: rgb(12%,40%,35%); fill-rule: evenodd;"/>
+		</g>
+	</g>
 </svg>

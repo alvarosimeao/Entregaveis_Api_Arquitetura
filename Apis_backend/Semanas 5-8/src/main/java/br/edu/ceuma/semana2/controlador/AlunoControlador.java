@@ -2,6 +2,7 @@ package br.edu.ceuma.semana2.controlador;
 
 import br.edu.ceuma.semana2.dto.AlunoRequest;
 import br.edu.ceuma.semana2.dto.AlunoResponse;
+import br.edu.ceuma.semana2.dto.Pagina;
 import br.edu.ceuma.semana2.servico.AlunoServico;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/alunos")
@@ -38,15 +37,15 @@ public class AlunoControlador {
     }
 
     @GetMapping
-    public ResponseEntity<List<AlunoResponse>> listar() {
-        return ResponseEntity.ok(alunoServico.listarTodos());
-    }
-
-    @GetMapping(params = "nome")
-    public ResponseEntity<List<AlunoResponse>> buscarPorNome(
-            @RequestParam String nome
-    ) {
-        return ResponseEntity.ok(alunoServico.buscarPorNome(nome));
+    public Pagina<AlunoResponse> listar(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int limit,
+            @RequestParam(defaultValue = "id") String sort,
+            @RequestParam(defaultValue = "asc") String order,
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) Integer idadeMin,
+            @RequestParam(required = false) Integer idadeMax) {
+        return alunoServico.listar(page, limit, sort, order, nome, idadeMin, idadeMax);
     }
 
     @GetMapping("/{id}")

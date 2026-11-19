@@ -5,3 +5,9 @@ Marco de validação de entrada e tratamento global de erros. O módulo reaprove
 POST e PUT em /alunos exigem nome e idade entre 1 e 130. A matrícula, quando informada, é única. A API responde a JSON inválido, rota ausente, conflito e falha interna com status, error, message, details e timestamp.
 
 Expor um stack trace revelaria componentes, caminhos e partes da implementação. Um contrato estável permite que o frontend associe erros a campos e apresente o resultado de forma consistente.
+
+## Semana 6 — paginação, ordenação e filtros
+
+GET /alunos aceita page de 1 a 1000000, limit de 1 a 100, sort (id, nome, idade ou matricula), order (asc ou desc), nome por trecho e idadeMin/idadeMax inclusivas. Parâmetros inválidos retornam 400. A resposta separa data de meta, que contém totalItems, itemsPerPage, currentPage e totalPages.
+
+Consultar a tabela inteira aumenta consumo de memória e de rede e pode atrasar outras requisições. A paginação é aplicada no banco. Metadados consistentes permitem usar o mesmo componente de navegação em várias telas.

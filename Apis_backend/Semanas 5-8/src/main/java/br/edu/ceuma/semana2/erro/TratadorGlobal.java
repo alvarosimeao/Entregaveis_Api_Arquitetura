@@ -10,6 +10,7 @@ import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @RestControllerAdvice
 public class TratadorGlobal {
@@ -36,6 +37,11 @@ public class TratadorGlobal {
     @ExceptionHandler(RecursoNaoEncontrado.class)
     ResponseEntity<ApiErro> recursoAusente(RecursoNaoEncontrado erro) {
         return resposta(ApiErro.simples(404, "NOT_FOUND", erro.getMessage()));
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    ResponseEntity<ApiErro> parametroInvalido(MethodArgumentTypeMismatchException erro) {
+        return resposta(ApiErro.simples(400, "VALIDATION_ERROR", "Parâmetro inválido: " + erro.getName() + "."));
     }
 
     @ExceptionHandler(Conflito.class)

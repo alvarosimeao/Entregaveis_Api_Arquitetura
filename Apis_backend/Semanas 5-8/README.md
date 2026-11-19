@@ -11,3 +11,9 @@ Expor um stack trace revelaria componentes, caminhos e partes da implementação
 GET /alunos aceita page de 1 a 1000000, limit de 1 a 100, sort (id, nome, idade ou matricula), order (asc ou desc), nome por trecho e idadeMin/idadeMax inclusivas. Parâmetros inválidos retornam 400. A resposta separa data de meta, que contém totalItems, itemsPerPage, currentPage e totalPages.
 
 Consultar a tabela inteira aumenta consumo de memória e de rede e pode atrasar outras requisições. A paginação é aplicada no banco. Metadados consistentes permitem usar o mesmo componente de navegação em várias telas.
+
+## Semana 7 — autenticação e Swagger
+
+Defina JWT_SECRET_BASE64 com pelo menos 32 bytes aleatórios codificados em Base64 antes de executar a aplicação. POST /register cria somente contas USER. POST /login retorna um Bearer de 15 minutos. Use Authorization: Bearer nos endpoints protegidos. DELETE /alunos/{id} e DELETE /usuarios/{id} exigem ADMIN. A autorização confere o perfil atual da conta em cada requisição. Abra /api-docs para usar o Swagger UI.
+
+BCrypt aplica sal e custo computacional. Em caso de acesso indevido ao banco, o hash dificulta tentativas de recuperação de senhas e não deve ser enviado ao cliente. O OpenAPI descreve entradas, saídas e regras de autenticação e permite conferir requisições durante a integração.

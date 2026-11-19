@@ -49,6 +49,11 @@ public class TratadorGlobal {
         return resposta(ApiErro.simples(409, "CONFLICT", erro.getMessage()));
     }
 
+    @ExceptionHandler(CredenciaisInvalidas.class)
+    ResponseEntity<ApiErro> credenciaisInvalidas() {
+        return resposta(ApiErro.simples(401, "UNAUTHORIZED", "Credenciais inválidas."));
+    }
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     ResponseEntity<ApiErro> integridade() {
         return resposta(ApiErro.simples(409, "CONFLICT", "O registro conflita com os dados existentes."));

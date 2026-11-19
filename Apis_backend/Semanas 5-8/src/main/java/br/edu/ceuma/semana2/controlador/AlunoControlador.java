@@ -4,6 +4,7 @@ import br.edu.ceuma.semana2.dto.AlunoRequest;
 import br.edu.ceuma.semana2.dto.AlunoResponse;
 import br.edu.ceuma.semana2.dto.Pagina;
 import br.edu.ceuma.semana2.servico.AlunoServico;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/alunos")
+@SecurityRequirement(name = "bearerAuth")
 public class AlunoControlador {
 
     private final AlunoServico alunoServico;

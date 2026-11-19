@@ -11,9 +11,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(properties = {
     "spring.datasource.url=jdbc:h2:mem:alunos;MODE=PostgreSQL",
-    "spring.jpa.hibernate.ddl-auto=create-drop", "aluno.nome=Exemplo", "aluno.ra=000000"
+    "spring.jpa.hibernate.ddl-auto=create-drop", "aluno.nome=Exemplo", "aluno.ra=000000",
+    "api.jwt.secret-base64=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
 })
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 class Semana5Test {
     @Autowired MockMvc mvc;
 

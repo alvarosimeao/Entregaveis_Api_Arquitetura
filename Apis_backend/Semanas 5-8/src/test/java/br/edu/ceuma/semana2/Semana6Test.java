@@ -14,7 +14,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(properties = {
     "spring.datasource.url=jdbc:h2:mem:alunos_paginacao;MODE=PostgreSQL",
-    "spring.datasource.username=sa", "spring.jpa.hibernate.ddl-auto=create-drop"
+    "spring.datasource.username=sa", "spring.jpa.hibernate.ddl-auto=create-drop",
+    "api.jwt.secret-base64=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
 })
 @AutoConfigureMockMvc(addFilters = false)
 @Transactional

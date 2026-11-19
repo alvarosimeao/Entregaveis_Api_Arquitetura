@@ -1,0 +1,534 @@
+{
+  "info": {
+    "name": "API acadêmica de alunos — CEUMA",
+    "description": "Execute na ordem. Cria uma conta e registros fictícios por execução. Os valores de JWT e senha são gerados e armazenados durante o teste.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "demoEmail",
+      "value": ""
+    },
+    {
+      "key": "demoPassword",
+      "value": ""
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "usuarioId",
+      "value": ""
+    },
+    {
+      "key": "alunoId",
+      "value": ""
+    },
+    {
+      "key": "execId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "OpenAPI e Bearer",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/v3/api-docs"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Bearer Auth\", () => pm.expect(pm.response.json().components.securitySchemes.bearerAuth.scheme).to.eql(\"bearer\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cadastro",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/register",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Conta de demonstração\",\n  \"email\": \"{{demoEmail}}\",\n  \"senha\": \"{{demoPassword}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const run = pm.variables.replaceIn(\"{{$guid}}\").replace(/-/g, \"\");",
+              "pm.collectionVariables.set(\"demoEmail\", \"ceuma.\" + run + \"@example.test\");",
+              "pm.collectionVariables.set(\"demoPassword\", \"Demo-\" + run);",
+              "pm.collectionVariables.set(\"execId\", run.slice(0, 12).toUpperCase());",
+              "pm.collectionVariables.unset(\"token\");"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+              "pm.test(\"Possui perfil, sem senha\", () => { const user = pm.response.json(); pm.expect(user.perfil).to.eql(\"USER\"); pm.expect(user).to.not.have.property(\"senha\"); });",
+              "if (pm.response.code === 201) pm.collectionVariables.set(\"usuarioId\", String(pm.response.json().id));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cadastro duplicado",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/register",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Conta de demonstração\",\n  \"email\": \"{{demoEmail}}\",\n  \"senha\": \"{{demoPassword}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+              "pm.test(\"Contrato de erro\", () => pm.expect(pm.response.json()).to.include({status: 409}));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{demoEmail}}\",\n  \"senha\": \"{{demoPassword}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"JWT de sessão\", () => pm.expect(pm.response.json().token.split(\".\")).to.have.lengthOf(3));",
+              "if (pm.response.code === 200) pm.collectionVariables.set(\"token\", pm.response.json().token);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Perfil protegido sem token",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/perfil"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));",
+              "pm.test(\"Contrato de erro\", () => pm.expect(pm.response.json()).to.include({status: 401}));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Perfil com JWT",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/perfil"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Possui perfil, sem senha\", () => { const user = pm.response.json(); pm.expect(user.perfil).to.eql(\"USER\"); pm.expect(user).to.not.have.property(\"senha\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Usuário comum em rota administrativa",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/usuarios/{{usuarioId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+              "pm.test(\"Contrato de erro\", () => pm.expect(pm.response.json()).to.include({status: 403}));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Body inválido",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/alunos",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"\",\n  \"idade\": 0\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Contrato de erro\", () => pm.expect(pm.response.json()).to.include({status: 400}));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "JSON inválido",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/alunos",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nome\":",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Contrato de erro\", () => pm.expect(pm.response.json()).to.include({status: 400}));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Criar um aluno",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/alunos",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Estudante {{execId}}\",\n  \"idade\": 21,\n  \"matricula\": \"{{execId}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set(\"alunoId\", String(pm.response.json().id));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Conflito de matrícula",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/alunos",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Estudante {{execId}}\",\n  \"idade\": 21,\n  \"matricula\": \"{{execId}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+              "pm.test(\"Contrato de erro\", () => pm.expect(pm.response.json()).to.include({status: 409}));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Buscar o aluno criado",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/alunos/{{alunoId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Atualizar idade",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/alunos/{{alunoId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Estudante {{execId}}\",\n  \"idade\": 23,\n  \"matricula\": \"{{execId}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Filtrar, ordenar e paginar",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/alunos?nome={{execId}}&idadeMin=21&idadeMax=25&page=1&limit=3&sort=idade&order=desc"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Metadados consistentes\", () => { const res = pm.response.json(); pm.expect(res.meta).to.deep.eql({totalItems: 1, itemsPerPage: 3, currentPage: 1, totalPages: 1}); pm.expect(res.data[0].idade).to.eql(23); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Aluno inexistente",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/alunos/9223372036854775807"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Contrato de erro\", () => pm.expect(pm.response.json()).to.include({status: 404}));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Limite inválido",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/alunos?limit=101"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Contrato de erro\", () => pm.expect(pm.response.json()).to.include({status: 400}));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
